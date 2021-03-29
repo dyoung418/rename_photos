@@ -17,12 +17,12 @@ class ChangePhotoNames(object):
     will give the opportunity to rename the files "2020-07 Fourth of July in California_005.jpg".
     '''
 
-    def __init__(self):
+    def __init__(self, topdir=None, recursive=False, noprompt=False, testrun=False):
         '''Initialize'''
-        self.topdir = None
-        self.recursive = False
-        self.noprompt = True
-        self.testrun = False
+        self.topdir = topdir
+        self.recursive = recursive
+        self.noprompt = noprompt
+        self.testrun = testrun
 
     def parse_arguments(self):
         parser = argparse.ArgumentParser(description='Rename Photo files to include containing directory name')
@@ -54,6 +54,7 @@ class ChangePhotoNames(object):
         return answerdict[int(response)]
 
     def start_interactive(self):
+        '''begin renaming files, following options for whether to do it recursively and whether to prompt'''
         for root, dirs, files in os.walk(self.topdir, 
                                         topdown=True, 
                                         onerror=None, 
