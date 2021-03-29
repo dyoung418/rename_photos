@@ -70,7 +70,10 @@ class ChangePhotoNames(object):
                 answer = 'yes'
                 move_answer = None
                 if not self.noprompt:
-                    print(f'\nDirectory {root}\nSample filnemae: {files[0]}')
+                    if len(files) >=3:
+                        print(f'\nDirectory {root}\nSample filename: {files[0]}\n                 {files[1]}\n                 {files[2]}')
+                    else:
+                        print(f'\nDirectory {root}\nSample filename: {files[0]}')                        
                     answer = self.prompt_user(f'Would you like to rename files in this directory?')
                     if answer == 'q':
                         return
@@ -93,7 +96,7 @@ class ChangePhotoNames(object):
                         if self.testrun:
                             print(f'Moves {os.path.join(os.path.basename(root), file)} to {os.path.join(os.path.basename(destdir), file)}')
                         else:
-                            print(f'{os.path.join(os.path.basename(root), file)} --> {os.path.join(os.path.basename(destdir), new_name)}')
+                            print(f'{os.path.join(os.path.basename(root), file)} --> {os.path.join(os.path.basename(destdir), file)}')
                             self.move_file_to_new_directory(os.path.join(root, file), destdir)
             if not self.recursive:
                 return
